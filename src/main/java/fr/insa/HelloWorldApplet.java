@@ -10,7 +10,7 @@ public class HelloWorldApplet extends Applet {
     };
     private static final short HELLO_WORLD_LEN = 11;
 
-    private static final byte CLA_APPLET = (byte)0x80;
+    private static final byte CLA_APPLET = (byte)0x80
     private static final byte INS_GET_HELLO = (byte)0x01;
 
     private HelloWorldApplet() {
