@@ -39,15 +39,13 @@ jobs:
         run: |
           chmod +x scripts/build.sh
           ./scripts/build.sh
-
+      - name: Find CAP
+        run: |
+          echo "CAP files:"
+          find . -type f -name "*.cap" -print
       - name: Run tests
         run: |
           chmod +x scripts/run_tests.sh
           ./scripts/run_tests.sh
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v1.0.${{ github.run_number }}
-          files: |
-            *.cap
+     
