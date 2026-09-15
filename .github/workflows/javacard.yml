@@ -45,7 +45,9 @@ jobs:
           chmod +x scripts/run_tests.sh
           ./scripts/run_tests.sh
 
-      - name: Upload CAP to Release
+      - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: build/*.cap
+          tag_name: v1.0.${{ github.run_number }}
+          files: |
+            *.cap
