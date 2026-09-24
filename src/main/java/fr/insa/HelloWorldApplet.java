@@ -4,6 +4,13 @@ import javacard.framework.*;
 
 public class HelloWorldApplet extends Applet {
 
+    
+    private static final byte[] BONJOUR = {
+           (byte) 'B', (byte) 'o', (byte) 'n', (byte) 'j', (byte) 'o', (byte) 'u',
+           (byte) 'r'
+       };
+private static final byte BJ_INS = (byte) 0x02;
+
     private static final byte[] HELLO_WORLD = {
         (byte)'H', (byte)'e', (byte)'l', (byte)'l', (byte)'o',
         (byte)' ', (byte)'W', (byte)'o', (byte)'r', (byte)'l', (byte)'d'
@@ -46,4 +53,14 @@ public class HelloWorldApplet extends Applet {
         Util.arrayCopyNonAtomic(HELLO_WORLD, (short)0, buffer, (short)0, HELLO_WORLD_LEN);
         apdu.setOutgoingAndSend((short)0, HELLO_WORLD_LEN);
     }
+
+    private void getBonjour(APDU apdu) {
+       byte[] buffer = apdu.getBuffer();
+       short length = (short) BONJOUR.length;
+       // Le buffer APDU sert à la fois de zone de réception et d'émission :
+       // on y recopie la réponse avant de l'envoyer.
+       Util.arrayCopyNonAtomic(BONJOUR, (short) 0, buffer, (short) 0, length);
+       apdu.setOutgoingAndSend((short) 0, length);
+   }
+
 }
