@@ -2,6 +2,19 @@ package fr.insa;
 
 import javacard.framework.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInputStream;
+
+public class CodeQLDemo {
+
+    public static Object vulnerable(byte[] data) throws Exception {
+        ObjectInputStream input =
+            new ObjectInputStream(new ByteArrayInputStream(data));
+
+        // controler une source non fiable par codeQL
+        return input.readObject();
+    }
+}
 public class HelloWorldApplet extends Applet {
 
     
