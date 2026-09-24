@@ -56,6 +56,9 @@ private static final byte BJ_INS = (byte) 0x02;
             case INS_GET_HELLO:
                 sendHelloWorld(apdu);
                 break;
+            case BJ_INS:
+                getBonjour(apdu);
+                break;
             default:
                 ISOException.throwIt(ISO7816.SW_INS_NOT_SUPPORTED);
         }
