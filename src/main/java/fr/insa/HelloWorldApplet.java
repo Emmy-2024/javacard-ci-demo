@@ -7,14 +7,14 @@ import java.io.ObjectInputStream;
 
 
 public class HelloWorldApplet extends Applet {
+
     
     private static final byte[] DEMO_PIN = {
     (byte) '1',
     (byte) '2',
     (byte) '3',
     (byte) '4'
-};
-    
+    };
     private OwnerPIN pin;
 
     private void initPin() {
@@ -23,7 +23,13 @@ public class HelloWorldApplet extends Applet {
         // ⚠️ PIN codé en dur dans l'application
         pin.update(DEMO_PIN, (short) 0, (byte) 4);
     }
-private static final byte BJ_INS = (byte) 0x02;
+    pin = new OwnerPIN((byte) 3, (byte) 4);
+    initPin();
+    private static final byte[] BONJOUR = {
+           (byte) 'B', (byte) 'o', (byte) 'n', (byte) 'j', (byte) 'o', (byte) 'u',
+           (byte) 'r'
+       };
+    private static final byte BJ_INS = (byte) 0x02;
 
     private static final byte[] HELLO_WORLD = {
         (byte)'H', (byte)'e', (byte)'l', (byte)'l', (byte)'o',
@@ -52,7 +58,6 @@ private static final byte BJ_INS = (byte) 0x02;
         if (cla != CLA_APPLET) {
             ISOException.throwIt(ISO7816.SW_CLA_NOT_SUPPORTED);
         }
-
         switch (ins) {
             case INS_GET_HELLO:
                 sendHelloWorld(apdu);
